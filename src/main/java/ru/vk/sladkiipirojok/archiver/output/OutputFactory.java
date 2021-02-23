@@ -14,11 +14,11 @@ public class OutputFactory {
     private OutputFactory() {
     }
 
-    public OutputFactory createOutput() {
+    public Output createOutput() {
         String outputClass = System.getProperties().getProperty(OUTPUT_TYPE_PROPERTY);
         Util.errorPropertyAssert(OUTPUT_TYPE_PROPERTY, outputClass);
         try {
-            return (OutputFactory) Class.forName(outputClass).getDeclaredConstructor().newInstance();
+            return (Output) Class.forName(outputClass).getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("Error in property " + OUTPUT_TYPE_PROPERTY + ": " + outputClass);
         } catch (NoSuchMethodException e) {

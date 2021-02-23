@@ -14,11 +14,11 @@ public class InputFactory {
     private InputFactory() {
     }
 
-    public InputFactory createInput() {
+    public Input createInput() {
         String inputClass = System.getProperties().getProperty(INPUT_TYPE_PROPERTY);
         Util.errorPropertyAssert(INPUT_TYPE_PROPERTY, inputClass);
         try {
-            return (InputFactory) Class.forName(inputClass).getDeclaredConstructor().newInstance();
+            return (Input) Class.forName(inputClass).getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
             throw new IllegalStateException("Error in property " + INPUT_TYPE_PROPERTY + ": " + inputClass);
         } catch (NoSuchMethodException e) {
