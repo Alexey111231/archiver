@@ -5,6 +5,4 @@ import java.util.List;
 
 public abstract class Input {
     abstract public List<File> read();
-
-    abstract Input instance();
 }

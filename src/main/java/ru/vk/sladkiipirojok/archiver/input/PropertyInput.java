@@ -28,9 +28,4 @@ public class PropertyInput extends Input {
 
         return Arrays.stream(filenames).map(File::new).collect(Collectors.toList());
     }
-
-    @Override
-    public Input instance() {
-        return new PropertyInput();
-    }
 }
