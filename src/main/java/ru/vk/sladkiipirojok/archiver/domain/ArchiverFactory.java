@@ -4,6 +4,10 @@ import ru.vk.sladkiipirojok.archiver.Util;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * Фабрика архивов,
+ * Берет данные о необходимом классе из системных property
+ */
 public class ArchiverFactory {
     private static final ArchiverFactory instance;
     private static final String ARCHIVER_TYPE_PROPERTY = "archiver.class";

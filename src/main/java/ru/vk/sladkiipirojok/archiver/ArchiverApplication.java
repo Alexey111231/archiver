@@ -8,13 +8,18 @@ import ru.vk.sladkiipirojok.archiver.output.Output;
 import ru.vk.sladkiipirojok.archiver.output.OutputFactory;
 
 public class ArchiverApplication {
+    /**
+     * Основной метод программы, выполняет архивацю или деархивацию
+     * взамисимости от параметра {@code isArchive}
+     *
+     * @param isArchive флаг архивации
+     */
     public static void oneWay(boolean isArchive) {
         Input input = InputFactory.instance().createInput();
         Output output = OutputFactory.instance().createOutput();
         Archiver archiver = ArchiverFactory.instance().createArchiver();
 
         Presenter presenter = new Presenter(archiver, input, output);
-
         if (isArchive) {
             presenter.archive();
         } else {

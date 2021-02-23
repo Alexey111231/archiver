@@ -33,6 +33,7 @@ public class Main {
             Arrays.stream(args).forEach(append);
             isArchive = true;
         } else {
+            //TODO fix
             Scanner scanner = new Scanner(System.in);
             scanner.forEachRemaining(append);
         }

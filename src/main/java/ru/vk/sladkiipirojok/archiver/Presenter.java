@@ -10,6 +10,13 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+/**
+ * Класс, являющийся свяюзующим звеном системы
+ * Отвечает за получения данных от входа,
+ * Передачу их в один из видом архиватора,
+ * Обрабатывает ошибки и
+ * отправляет данные на вывод
+ */
 public class Presenter {
     private final Archiver archiver;
     private final Input input;
@@ -21,6 +28,12 @@ public class Presenter {
         this.output = output;
     }
 
+    /**
+     * Метод получает файлы из входа,
+     * затем генерирует случайное имя архива
+     * отправляет данные на архивацию
+     * Отображает ошибки и записанные файлы
+     */
     public void archive() {
         List<File> files = input.read();
         List<File> filteredFiles = files.stream()
@@ -29,21 +42,36 @@ public class Presenter {
 
         String archiveName = UUID.randomUUID().toString();
 
-        archiver.archive(archiveName, filteredFiles);
+        List<File> savedFiles;
+        try {
+            savedFiles = archiver.archive(archiveName, filteredFiles);
+        } catch (IllegalStateException ex) {
+            System.out.println(ex.getMessage());
+            return;
+        }
 
         StringBuilder outputString = new StringBuilder();
         Consumer<String> append = s -> outputString.append(s).append("\n");
         append.accept(archiveName);
-        filteredFiles.stream().map(File::getName).forEach(append);
+        savedFiles.stream().map(File::getPath).forEach(append);
 
         output.write(outputString.toString());
     }
 
+    /**
+     * Метод получает файлы из входа, первым файлом всегда идет архив
+     * отправляет данные на деархивацию
+     * Отображает ошибки
+     */
     public void unpack() {
         List<File> files = input.read();
 
         String archiveName = files.remove(0).getName();
 
-        archiver.unpack(archiveName, files);
+        try {
+            archiver.unpack(archiveName, files);
+        } catch (IllegalStateException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

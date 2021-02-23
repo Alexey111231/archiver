@@ -1,7 +1,7 @@
 package ru.vk.sladkiipirojok.archiver.output;
 
 public class ConsoleOutput extends Output {
-    private ConsoleOutput() {
+    ConsoleOutput() {
     }
 
     @Override

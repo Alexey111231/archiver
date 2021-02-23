@@ -4,6 +4,11 @@ import ru.vk.sladkiipirojok.archiver.Util;
 
 import java.lang.reflect.InvocationTargetException;
 
+
+/**
+ * Фабрика входов,
+ * Берет данные о необходимом классе из системных property
+ */
 public class InputFactory {
     private static final InputFactory instance;
     private static final String INPUT_TYPE_PROPERTY = "input.class";

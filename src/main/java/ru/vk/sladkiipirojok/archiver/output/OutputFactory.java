@@ -4,6 +4,10 @@ import ru.vk.sladkiipirojok.archiver.Util;
 
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * Фабрика выходов,
+ * Берет данные о необходимом классе из системных property
+ */
 public class OutputFactory {
     private static final OutputFactory instance;
     private static final String OUTPUT_TYPE_PROPERTY = "output.class";

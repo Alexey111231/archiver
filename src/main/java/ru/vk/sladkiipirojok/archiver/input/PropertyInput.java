@@ -11,9 +11,15 @@ public class PropertyInput extends Input {
     private static final String PROPERTY_KEY = "input.property.key";
     private static final String SEPARATOR_KEY = "files.string.separator";
 
-    private PropertyInput() {
+    PropertyInput() {
     }
 
+    /**
+     * Функция читает заранее сохраненную строку с именами файлов из системных property
+     * Преобразует их в список файлов и отдает дальше
+     *
+     * @return список входных файлов
+     */
     @Override
     public List<File> read() {
         String filesProperty = System.getProperties().getProperty(PROPERTY_KEY);
