@@ -31,7 +31,6 @@ public class PropertyInput extends Input {
         String separator = System.getProperties().getProperty(SEPARATOR_KEY);
         Util.errorPropertyAssert(SEPARATOR_KEY, separator);
         String[] filenames = files.trim().split(separator);
-
-        return Arrays.stream(filenames).map(File::new).collect(Collectors.toList());
+        return Arrays.stream(filenames).filter(s -> !s.isEmpty()).map(File::new).collect(Collectors.toList());
     }
 }
