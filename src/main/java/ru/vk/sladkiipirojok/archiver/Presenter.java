@@ -44,7 +44,7 @@ public class Presenter {
 
         List<File> savedFiles;
         try {
-            savedFiles = archiver.archive(archiveName, filteredFiles);
+            savedFiles = archiver.archive(new File(archiveName), filteredFiles);
         } catch (IllegalStateException ex) {
             System.out.println(ex.getMessage());
             return;
@@ -69,7 +69,7 @@ public class Presenter {
         String archiveName = files.remove(0).getName();
 
         try {
-            archiver.unpack(archiveName, files);
+            archiver.unpack(new File(archiveName), files);
         } catch (IllegalStateException ex) {
             System.out.println(ex.getMessage());
         }

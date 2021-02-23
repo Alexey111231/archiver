@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 public interface Archiver {
-    List<File> archive(String name, List<File> fileList);
+    List<File> archive(File archive, List<File> fileList);
 
-    void unpack(String name, List<File> fileList);
+    void unpack(File archive, List<File> fileList);
 }

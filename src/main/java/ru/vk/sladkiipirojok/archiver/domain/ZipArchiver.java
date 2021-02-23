@@ -11,14 +11,14 @@ public class ZipArchiver implements Archiver {
     /**
      * Функция архивации данных
      *
-     * @param name     имя архива для записи
+     * @param archive  Файл архива для записи
      * @param fileList список файлов для записи
      * @return список сохраненных файлов
      */
     @Override
-    public List<File> archive(String name, List<File> fileList) {
+    public List<File> archive(File archive, List<File> fileList) {
         try (ZipOutputStream zipStream =
-                     new ZipOutputStream(new FileOutputStream(name))) {
+                     new ZipOutputStream(new FileOutputStream(archive))) {
             //Задаем степень компрессии файлов
             zipStream.setLevel(5);
 
@@ -59,12 +59,12 @@ public class ZipArchiver implements Archiver {
     }
 
     /**
-     * @param name     Имя архива
+     * @param archive  Файл архива
      * @param fileList Список файлов для разархифирования
      */
     @Override
-    public void unpack(String name, List<File> fileList) {
-        try (ZipFile zip = new ZipFile(name)) {
+    public void unpack(File archive, List<File> fileList) {
+        try (ZipFile zip = new ZipFile(archive)) {
             for (File file : fileList) {
                 ZipEntry entry = zip.getEntry(file.getPath());
 
@@ -89,7 +89,7 @@ public class ZipArchiver implements Archiver {
                 }
             }
         } catch (IOException e) {
-            throw new IllegalStateException("Failed archive " + name + " not found");
+            throw new IllegalStateException("Failed archive " + archive.getPath() + " not found");
         }
     }
 
