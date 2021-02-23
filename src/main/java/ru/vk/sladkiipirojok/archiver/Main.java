@@ -1,5 +1,6 @@
 package ru.vk.sladkiipirojok.archiver;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -32,10 +33,13 @@ public class Main {
         if (args.length != 0) {
             Arrays.stream(args).forEach(append);
             isArchive = true;
-        } else {
-            //TODO fix
+        } else if (!systemInEmpty()) {//Защита от зависания при пустом потоке
+            //Скорее всего надо заменить сканнер обычным Reader
             Scanner scanner = new Scanner(System.in);
-            scanner.forEachRemaining(append);
+
+            if (scanner.hasNext()) {
+                scanner.forEachRemaining(append);
+            }
         }
 
         if (assertEmptyInput(files.toString(), separator)) {
@@ -57,6 +61,16 @@ public class Main {
 
     private static Properties getSystemProperty() {
         return System.getProperties();
+    }
+
+    private static boolean systemInEmpty() {
+        boolean emptyInput;
+        try {
+            emptyInput = new BufferedInputStream(System.in).available() == 0;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return emptyInput;
     }
 }
 
