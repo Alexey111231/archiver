@@ -25,9 +25,9 @@ public class InputFactory {
         try {
             return (Input) Class.forName(inputClass).getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
-            throw new IllegalStateException("Error in property " + INPUT_TYPE_PROPERTY + ": " + inputClass);
+            throw new IllegalStateException("Error in property " + INPUT_TYPE_PROPERTY + ": " + inputClass, e);
         } catch (NoSuchMethodException e) {
-            throw new IllegalStateException("Not found constructor without parameters: " + inputClass);
+            throw new IllegalStateException("Not found constructor without parameters: " + inputClass, e);
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }

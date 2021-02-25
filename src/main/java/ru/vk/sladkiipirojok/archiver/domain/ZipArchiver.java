@@ -28,7 +28,7 @@ public class ZipArchiver implements Archiver {
 
             return savedFiles;
         } catch (IOException e) {
-            throw new IllegalStateException("Failed to create archive try again");
+            throw new IllegalStateException("Failed to create archive try again", e);
         }
     }
 
@@ -53,7 +53,7 @@ public class ZipArchiver implements Archiver {
                 write(fileStream, out);
                 savedFiles.add(file);
             } catch (IOException e) {
-                throw new IllegalStateException("Cannot write data to archive");
+                throw new IllegalStateException("Cannot write data to archive", e);
             }
         }
     }
@@ -85,11 +85,11 @@ public class ZipArchiver implements Archiver {
                             new BufferedOutputStream(new FileOutputStream(
                                     file.getPath())));
                 } catch (IOException e) {
-                    throw new IllegalStateException("Cannot write data to file");
+                    throw new IllegalStateException("Cannot write data to file", e);
                 }
             }
         } catch (IOException e) {
-            throw new IllegalStateException("Failed archive " + archive.getPath() + " not found");
+            throw new IllegalStateException("Failed archive " + archive.getPath() + " not found", e);
         }
     }
 

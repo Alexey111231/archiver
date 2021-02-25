@@ -24,9 +24,9 @@ public class ArchiverFactory {
         try {
             return (Archiver) Class.forName(archiverClass).getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
-            throw new IllegalStateException("Error in property " + ARCHIVER_TYPE_PROPERTY + ": " + archiverClass);
+            throw new IllegalStateException("Error in property " + ARCHIVER_TYPE_PROPERTY + ": " + archiverClass, e);
         } catch (NoSuchMethodException e) {
-            throw new IllegalStateException("Not found constructor without parameters: " + archiverClass);
+            throw new IllegalStateException("Not found constructor without parameters: " + archiverClass, e);
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }

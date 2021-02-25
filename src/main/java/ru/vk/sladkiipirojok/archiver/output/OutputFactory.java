@@ -24,9 +24,9 @@ public class OutputFactory {
         try {
             return (Output) Class.forName(outputClass).getDeclaredConstructor().newInstance();
         } catch (ClassNotFoundException e) {
-            throw new IllegalStateException("Error in property " + OUTPUT_TYPE_PROPERTY + ": " + outputClass);
+            throw new IllegalStateException("Error in property " + OUTPUT_TYPE_PROPERTY + ": " + outputClass, e);
         } catch (NoSuchMethodException e) {
-            throw new IllegalStateException("Not found constructor without parameters: " + outputClass);
+            throw new IllegalStateException("Not found constructor without parameters: " + outputClass, e);
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }

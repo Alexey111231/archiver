@@ -18,7 +18,7 @@ public class Main {
             InputStream applicationProperties = Main.class.getResourceAsStream(APPLICATION_PROPERTIES);
             System.getProperties().load(applicationProperties);
         } catch (IOException | IllegalArgumentException e) {
-            throw new IllegalStateException("Error in property file: \"archiver.properties\"");
+            throw new IllegalStateException("Error in property file: \"archiver.properties\"", e);
         }
 
         //В данной реализации main, данные передаются в системные проперти

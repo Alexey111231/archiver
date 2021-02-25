@@ -1,6 +1,8 @@
 package ru.vk.sladkiipirojok.archiver.input;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -9,6 +11,18 @@ import java.util.Properties;
 class PropertyInputTest {
     private static final String FILES_KEY_PROPERTY = "input.property.key";
     private static final String SEPARATOR_KEY = "files.string.separator";
+
+    private static Properties systemProperties;
+
+    @BeforeAll
+    static void setUp() {
+        systemProperties = (Properties) System.getProperties().clone();
+    }
+
+    @AfterEach
+    void restoreSystemProperty() {
+        System.setProperties(systemProperties);
+    }
 
     @Test
     void Read_NoPropertyForPropertyKey_ThrownIllegalStateException() {
